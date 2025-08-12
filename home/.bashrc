@@ -120,5 +120,7 @@ bind TAB:menu-complete
 
 #export N64_LIBGCCDIR="/opt/crashsdk/lib/gcc/mips64-elf/12.2.0"
 #export PATH="/opt/crashsdk/bin:/opt/libdragon/bin:$PATH"
-export PATH="/opt/libdragon/bin:$PATH"
 #export ROOT=/etc/n64
+
+export PATH="/opt/libdragon/bin:$PATH"
+export PATH="~/dotfiles/scripts/linux:$PATH"
