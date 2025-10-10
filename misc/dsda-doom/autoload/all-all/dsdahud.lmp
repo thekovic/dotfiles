@@ -129,8 +129,8 @@ event_split 10 16 top_left
 level_splits 2 2 top
 fps 298 0 top_right
 minimap 264 8 top_right 48 48 1024
-message 0 0 top_left
-secret_message 0 76 none
+message 0 0 none 1
+secret_message 0 30 none
 add_offset 1 top_left
 big_health 3 30 bottom_left
 big_armor 60 30 bottom_left
@@ -161,7 +161,7 @@ level_splits 2 2 top
 fps 298 0 top_right
 minimap 264 8 top_right 48 48 1024
 message 0 0 top 1
-secret_message 0 76 none
+secret_message 0 30 none
 add_offset 1 top_left
 
 doom map
