@@ -124,3 +124,8 @@ bind TAB:menu-complete
 
 export PATH="/opt/libdragon/bin:$PATH"
 export PATH="~/dotfiles/scripts/linux:$PATH"
+
+alias edit='msedit'
+alias vim='nvim'
+alias dir='ls -l'
+
