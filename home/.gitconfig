@@ -1,0 +1,15 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = thekovic
+	email = 72971433+thekovic@users.noreply.github.com
+[pull]
+	rebase = true
+[core]
+	autocrlf = true
+	editor = code --wait
+[push]
+	autoSetupRemote = true
