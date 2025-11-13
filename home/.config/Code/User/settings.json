@@ -14,6 +14,23 @@
     // Always highlight non-Unicode characters.
     "editor.unicodeHighlight.includeComments": true,
     "editor.unicodeHighlight.nonBasicASCII": true,
+    // Enable to avoid highlighting regular Czech non-Unicode characters.
+    "editor.unicodeHighlight.allowedCharacters": {
+        "ě": true,
+        "š": true,
+        "č": true,
+        "ř": true,
+        "ý": true,
+        "á": true,
+        "í": true,
+        "é": true,
+        "ú": true,
+        "ů": true,
+        "ó": true,
+        "ž": true
+    },
+    // This is usually annoying, not useful.
+    "editor.autoClosingComments": "never",
     // No more tab scrolling.
     "workbench.editor.wrapTabs": true,
     // Use Windows Terminal font by default (like Visual Studio 2026).
@@ -24,9 +41,32 @@
     "workbench.secondarySideBar.defaultVisibility": "hidden",
 
     // ---------------------------
+    // SECTION: C/C++ settings
+    // ---------------------------
+
+    // Sensible standards (wish I could enable C23 but it breaks N64 homebrew).
+    "C_Cpp.default.cStandard": "gnu17",
+    "C_Cpp.default.cppStandard": "gnu++20",
+    // Stop IntelliSense for confusingly thinking about it and always just consider header files as C++.
+    // It's better for compatibility anyway.
+    "files.associations": {
+        "*.h": "cpp"
+    },
+    // Always include headers for N64 homebrew so I don't have to do it per-project.
+    "C_Cpp.default.includePath": [
+        "C:\\Code\\libdragon\\include",
+        "C:\\Code\\tiny3d\\include"
+    ],
+    // (Windows only) Use GCC mode by default to help with IntelliSense analysis for N64 homebrew.
+    "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+
+    // ---------------------------
     // SECTION: Extension settings
     // ---------------------------
 
     // Redhat's XML extension.
     "redhat.telemetry.enabled": false,
+    // Enable this if you suffer from chronic saving to stop the Go extension from slowing to a crawl (especially in big projects like Trivy).
+    "go.vetOnSave": "off",
 }
