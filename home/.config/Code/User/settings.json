@@ -1,0 +1,32 @@
+{
+    // ---------------------------
+    // SECTION: Editor look & feel
+    // ---------------------------
+
+    // Always word wrap.
+    "editor.wordWrap": "on",
+    // Word wrap in git-made temporary files too.
+    "[git-commit]": {
+        "editor.wordWrap": "on"
+    },
+    // Don't bother me with trust pop-ups every time I open something.
+    "security.workspace.trust.enabled": false,
+    // Always highlight non-Unicode characters.
+    "editor.unicodeHighlight.includeComments": true,
+    "editor.unicodeHighlight.nonBasicASCII": true,
+    // No more tab scrolling.
+    "workbench.editor.wrapTabs": true,
+    // Use Windows Terminal font by default (like Visual Studio 2026).
+    "editor.fontFamily": "'Cascadia Mono', Consolas, 'Courier New', monospace",
+    // Enable on machines with screens that are at least 1440p at 100% DPI scaling.
+    "window.zoomLevel": 1,
+    // Enable if Copilot tab bothers you too much.
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+
+    // ---------------------------
+    // SECTION: Extension settings
+    // ---------------------------
+
+    // Redhat's XML extension.
+    "redhat.telemetry.enabled": false,
+}
