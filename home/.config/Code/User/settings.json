@@ -36,9 +36,9 @@
     // Use Windows Terminal font by default (like Visual Studio 2026).
     "editor.fontFamily": "'Cascadia Mono', Consolas, 'Courier New', monospace",
     // Enable on machines with screens that are at least 1440p at 100% DPI scaling.
-    "window.zoomLevel": 1,
+    //"window.zoomLevel": 1,
     // Enable if Copilot tab bothers you too much.
-    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    //"workbench.secondarySideBar.defaultVisibility": "hidden",
 
     // ---------------------------
     // SECTION: C/C++ settings
