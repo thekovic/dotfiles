@@ -41,6 +41,28 @@
     //"workbench.secondarySideBar.defaultVisibility": "hidden",
 
     // ---------------------------
+    // SECTION: Default theme fixes
+    // ---------------------------
+    
+    "editor.tokenColorCustomizations": {
+        // Restore C keywords to original thick purple from current faint pink.
+        "textMateRules": [
+            {
+                "scope": "keyword.control.c",
+                "settings": {
+                    "foreground": "#C586C0"
+                }
+            },
+            {
+                "scope": "keyword.control.directive.include.c",
+                "settings": {
+                    "foreground": "#C586C0"
+                }
+            }
+        ]
+    },
+
+    // ---------------------------
     // SECTION: C/C++ settings
     // ---------------------------
 
