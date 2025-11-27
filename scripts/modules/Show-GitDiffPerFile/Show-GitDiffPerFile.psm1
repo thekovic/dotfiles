@@ -4,3 +4,5 @@ function Show-GitDiffPerFile {
         Read-Host "Press Enter to continue"
     }
 }
+
+Export-ModuleMember -Function Show-GitDiffPerFile
