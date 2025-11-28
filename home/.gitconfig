@@ -9,7 +9,7 @@
 [pull]
 	rebase = true
 [core]
-	autocrlf = true
+	autocrlf = input
 	editor = code --wait
 [push]
 	autoSetupRemote = true

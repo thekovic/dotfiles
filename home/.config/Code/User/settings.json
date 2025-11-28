@@ -1,5 +1,14 @@
 {
     // ---------------------------
+    // SECTION: Editor behaviour
+    // ---------------------------
+
+    // Default to LF in all circumstances. Even on Windows, software is smart enough these days to handle LF fine so this just saves headaches.
+    "files.eol": "\n",
+    // This is usually annoying, not useful.
+    "editor.autoClosingComments": "never",
+
+    // ---------------------------
     // SECTION: Editor look & feel
     // ---------------------------
 
@@ -29,16 +38,14 @@
         "ó": true,
         "ž": true
     },
-    // This is usually annoying, not useful.
-    "editor.autoClosingComments": "never",
     // No more tab scrolling.
     "workbench.editor.wrapTabs": true,
     // Use Windows Terminal font by default (like Visual Studio 2026).
     "editor.fontFamily": "'Cascadia Mono', Consolas, 'Courier New', monospace",
     // Enable on machines with screens that are at least 1440p at 100% DPI scaling.
-    //"window.zoomLevel": 1,
+    // "window.zoomLevel": 1,
     // Enable if Copilot tab bothers you too much.
-    //"workbench.secondarySideBar.defaultVisibility": "hidden",
+    // "workbench.secondarySideBar.defaultVisibility": "hidden",
 
     // ---------------------------
     // SECTION: Default theme fixes
@@ -69,8 +76,7 @@
     // Sensible standards (wish I could enable C23 but it breaks N64 homebrew).
     "C_Cpp.default.cStandard": "gnu17",
     "C_Cpp.default.cppStandard": "gnu++20",
-    // Stop IntelliSense for confusingly thinking about it and always just consider header files as C++.
-    // It's better for compatibility anyway.
+    // Stop IntelliSense from confusingly thinking about it and always just consider header files as C++. It's better for compatibility anyway.
     "files.associations": {
         "*.h": "cpp"
     },
@@ -80,8 +86,8 @@
         "C:\\Code\\tiny3d\\include"
     ],
     // (Windows only) Use GCC mode by default to help with IntelliSense analysis for N64 homebrew.
-    "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\g++.exe",
-    "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
+    // "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+    // "C_Cpp.default.intelliSenseMode": "windows-gcc-x64",
 
     // ---------------------------
     // SECTION: Extension settings
