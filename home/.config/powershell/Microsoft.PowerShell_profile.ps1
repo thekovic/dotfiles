@@ -7,5 +7,7 @@ Set-Alias Invoke-Rebase Invoke-GitRebase
 
 Set-Alias Trim-Video Edit-VideoTrim
 
+Set-PSReadLineOption -EditMode Windows
+
 # Must be last.
 Invoke-Expression (&starship init powershell)
