@@ -2,7 +2,13 @@ function Write-Path {
     [CmdletBinding()]
     param()
 
-    $env:Path -split ';' | ForEach-Object {
+    if ($IsLinux) {
+        $pathDelim = ':'
+    } else {
+        $pathDelim = ';'
+    }
+    Write-Host "PATH:"
+    $env:PATH -split $pathDelim | ForEach-Object {
         if ($_ -ne '') {
             Write-Output $_
         }
