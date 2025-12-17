@@ -24,6 +24,9 @@ function Get-FileHashes {
 
     Get-ChildItem -Path $RootDir -Recurse -File | ForEach-Object {
         $relativePath = $_.FullName.Substring($RootDir.Length).TrimStart('\', '/')
+        if ($IsWindows) {
+            $relativePath = $relativePath.ToLower()
+        }
         $hash = Get-Hash -FilePath $_.FullName
         if ($hash) {
             $fileHashes[$relativePath] = $hash
@@ -42,6 +45,9 @@ function Compare-Directory {
         [Parameter(Mandatory=$true)]
         [string]$Dir2
     )
+
+    $Dir1 = Resolve-Path $Dir1
+    $Dir2 = Resolve-Path $Dir2
 
     Write-Host "`nComparing:`n  $Dir1`n  $Dir2"
 
