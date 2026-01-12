@@ -28,7 +28,7 @@ function Get-ReadableSize {
     }
 }
 
-$Extensions = @(".cue", ".iso", ".n64", ".z64", ".sfc", ".smc", ".nes")
+$Extensions = @(".cue", ".iso", ".n64", ".v64", ".z64", ".sfc", ".smc", ".nes", ".gb", ".gbc", ".gba")
 $IgnoreDirs = @("libdragon", "libdragon-kovic", "vcpkg", "tiny3d")
 
 Get-ChildItem -LiteralPath $Path -Recurse -File |
