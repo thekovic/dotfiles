@@ -7,6 +7,7 @@ Set-Alias grep Select-String
 # Alias my own modules for easier access.
 Set-Alias Invoke-Rebase Invoke-GitRebase
 Set-Alias Trim-Video Edit-VideoTrim
+Set-Alias Take-Commit Update-GitCommitAuthorship
 
 # Make sure we have proper controls in the shell.
 Set-PSReadLineOption -EditMode Windows
@@ -41,4 +42,7 @@ if ($IsLinux) {
 
 # Autorun section.
 Invoke-Expression (&starship init powershell)
-Invoke-Expression fastfetch
+# Fastfetch has Windows port but I somehow kinda don't feel the need on Windows.
+if ($IsLinux) {
+    Invoke-Expression fastfetch
+}
