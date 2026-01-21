@@ -18,6 +18,8 @@
     "[git-commit]": {
         "editor.wordWrap": "on"
     },
+    // Start wrap at the beginning of line.
+    // "editor.wrappingIndent": "none",
     // Don't bother me with trust pop-ups every time I open something.
     "security.workspace.trust.enabled": false,
     // Always highlight non-Unicode characters.
