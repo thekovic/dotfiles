@@ -12,6 +12,18 @@ Set-Alias Take-Commit Update-GitCommitAuthorship
 # Make sure we have proper controls in the shell.
 Set-PSReadLineOption -EditMode Windows
 
+if ($IsWindows) {
+    function Invoke-Bash {
+        $convertedArgs = $args | ForEach-Object {
+            '"' + ($_ -replace '\\', '/') + '"'
+        }
+
+        bash -c ($convertedArgs -join ' ')
+    }
+
+    Set-Alias msys Invoke-Bash
+}
+
 if ($IsLinux) {
     # Alias Microsoft Edit to 'edit' to match Windows.
     Set-Alias edit msedit
