@@ -14,6 +14,11 @@ Set-PSReadLineOption -EditMode Windows
 
 if ($IsWindows) {
     function Invoke-Bash {
+        if (-not (Get-Command bash -ErrorAction SilentlyContinue)) {
+            Write-Error "'bash' was not found. Please install MSYS2 and ensure bash.exe is on PATH."
+            return
+        }
+
         $convertedArgs = $args | ForEach-Object {
             '"' + ($_ -replace '\\', '/') + '"'
         }
