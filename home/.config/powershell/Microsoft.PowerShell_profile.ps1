@@ -23,7 +23,9 @@ if ($IsWindows) {
             '"' + ($_ -replace '\\', '/') + '"'
         }
 
-        bash -c ($convertedArgs -join ' ')
+        Start-Process bash -NoNewWindow -Wait -ArgumentList ($convertedArgs -join ' ') -Environment @{
+            MSYSTEM = 'UCRT64'
+        }
     }
 
     Set-Alias msys Invoke-Bash
