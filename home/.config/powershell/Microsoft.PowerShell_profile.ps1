@@ -9,9 +9,6 @@ Set-Alias Invoke-Rebase Invoke-GitRebase
 Set-Alias Trim-Video Edit-VideoTrim
 Set-Alias Take-Commit Update-GitCommitAuthorship
 
-# Make sure we have proper controls in the shell.
-Set-PSReadLineOption -EditMode Windows
-
 if ($IsWindows) {
     function Invoke-Bash {
         if (-not (Get-Command bash -ErrorAction SilentlyContinue)) {
@@ -32,6 +29,8 @@ if ($IsWindows) {
 }
 
 if ($IsLinux) {
+    # Make sure we have proper controls in the shell.
+    Set-PSReadLineOption -EditMode Windows
     # Alias Microsoft Edit to 'edit' to match Windows.
     Set-Alias edit msedit
     # FEDORA ONLY: Make cmdlet to query package upgrades (because Discover won't tell me).
