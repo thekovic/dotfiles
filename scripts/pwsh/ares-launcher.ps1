@@ -19,7 +19,6 @@ param (
     [string]$Version        # Optional version number (e.g. 146)
 )
 
-# TODO: Make this work also if there's only ares.exe (aka normal ares setup instead of versioned).
 function Start-Ares {
     param (
         [string]$Game,
@@ -29,7 +28,10 @@ function Start-Ares {
     # Find all ares-v*.exe files
     $aresFiles = Get-ChildItem -Filter "ares-v*.exe" -ErrorAction SilentlyContinue
     if (-not $aresFiles) {
-        Write-Host "No ares-vXXX.exe files found in this $aresDir." -ForegroundColor Red
+        Write-Host "No ares-vXXX.exe files found in $aresDir." -ForegroundColor Yellow
+        # Launch Ares and wait for exit
+        Write-Host "Launching Ares (unknown version)..." -ForegroundColor Green
+        Start-Process -FilePath ".\ares.exe" -ArgumentList $Game -Wait
         return
     }
 
