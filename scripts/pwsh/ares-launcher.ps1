@@ -24,14 +24,16 @@ function Start-Ares {
         [string]$Game,
         [string]$Version
     )
+
+    $exeSuffix = ($IsWindows)? ".exe" : ""
     
     # Find all ares-v*.exe files
-    $aresFiles = Get-ChildItem -Filter "ares-v*.exe" -ErrorAction SilentlyContinue
+    $aresFiles = Get-ChildItem -Filter "ares-v*$exeSuffix" -ErrorAction SilentlyContinue
     if (-not $aresFiles) {
-        Write-Host "No ares-vXXX.exe files found in $aresDir." -ForegroundColor Yellow
+        Write-Host "No ares-vXXX$exeSuffix files found in $aresDir." -ForegroundColor Yellow
         # Launch Ares and wait for exit
         Write-Host "Launching Ares (unknown version)..." -ForegroundColor Green
-        Start-Process -FilePath ".\ares.exe" -ArgumentList $Game -Wait
+        Start-Process -FilePath ".\ares$exeSuffix" -ArgumentList $Game -Wait
         return
     }
 
@@ -58,7 +60,7 @@ function Start-Ares {
     }
 
     # Compose filenames
-    $exeFile = "ares-v$Version.exe"
+    $exeFile = "ares-v$Version$exeSuffix"
     $dllFile = "librashader-v$Version.dll"
 
     # Verify both files exist
@@ -75,9 +77,9 @@ function Start-Ares {
     $backupExe = $null
     $backupDll = $null
 
-    if (Test-Path "ares.exe") {
-        $backupExe = "ares-backup-$([DateTime]::Now.ToString('yyyyMMddHHmmss')).exe"
-        Rename-Item "ares.exe" $backupExe
+    if (Test-Path "ares$exeSuffix") {
+        $backupExe = "ares-backup-$([DateTime]::Now.ToString('yyyyMMddHHmmss'))$exeSuffix"
+        Rename-Item "ares$exeSuffix" $backupExe
     }
     if (Test-Path "librashader.dll") {
         $backupDll = "librashader-backup-$([DateTime]::Now.ToString('yyyyMMddHHmmss')).dll"
@@ -85,21 +87,21 @@ function Start-Ares {
     }
 
     # Rename selected versioned files
-    Rename-Item $exeFile "ares.exe"
+    Rename-Item $exeFile "ares$exeSuffix"
     Rename-Item $dllFile "librashader.dll"
 
     try {
         # Launch Ares and wait for exit
         Write-Host "Launching Ares v$Version..." -ForegroundColor Green
-        Start-Process -FilePath ".\ares.exe" -ArgumentList $Game -Wait
+        Start-Process -FilePath ".\ares$exeSuffix" -ArgumentList $Game -Wait
     }
     finally {
         # Restore file names
-        Rename-Item "ares.exe" $exeFile
+        Rename-Item "ares$exeSuffix" $exeFile
         Rename-Item "librashader.dll" $dllFile
 
         if ($backupExe) {
-            Rename-Item $backupExe "ares.exe"
+            Rename-Item $backupExe "ares$exeSuffix"
         }
         if ($backupDll) {
             Rename-Item $backupDll "librashader.dll"
@@ -112,6 +114,7 @@ function Start-Ares {
 # Get absolute path to game
 if ($Game -and (Test-Path $Game)) {
     $gamePath = (Resolve-Path $Game).Path
+    # Windows apps launched from WSL still expect Windows paths.
     # Convert path to Windows path if launching from WSL
     if (($null -ne $env:WSL_DISTRO_NAME) -and $IsLinux) {
         $gamePath = wslpath -w $gamePath
