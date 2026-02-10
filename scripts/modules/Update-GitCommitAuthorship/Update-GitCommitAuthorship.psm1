@@ -8,6 +8,10 @@ function Update-GitCommitAuthorship {
     $authorName = "thekovic"
     $authorEmail = "72971433+thekovic@users.noreply.github.com"
 
+    # Set local Git config to correct name & email in case I forgot
+    git config user.name $authorName
+    git config user.email $authorEmail
+
     $originalBranch = git rev-parse --abbrev-ref HEAD
     Write-Host "On branch $originalBranch" -ForegroundColor Cyan
 
