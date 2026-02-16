@@ -16,10 +16,16 @@ if ($IsWindows) {
             return
         }
 
-        $convertedArgs = $args | ForEach-Object {
-            '"' + ($_ -replace '\\', '/') + '"'
-        }
+        # Convert backwards slashes to forward slashes to handle autosuggest from Powershell.
+        $convertedArgs = $args | ForEach-Object { ($_ -replace '\\', '/') }
+        # Surround arguments with quotes so that they're single string for bash.
+        $convertedArgs = '"' + ($convertedArgs -join ' ') + '"'
+        # Print what we got for debugging purpose.
+        Write-Host "[bash]" $convertedArgs
+        # Prepend "-c" so that bash interprets our arguments as command.
+        $convertedArgs = @("-c") + @($convertedArgs)
 
+        # Spawn bash instance. Set MSYSTEM=UCRT64 to try to pass off as proper MSYS2 UCRT64 environment.
         Start-Process bash -NoNewWindow -Wait -ArgumentList ($convertedArgs -join ' ') -Environment @{
             MSYSTEM = 'UCRT64'
         }
