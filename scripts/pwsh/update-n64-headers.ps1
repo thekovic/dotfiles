@@ -1,8 +1,9 @@
 param (
-    # Paths to directories with cloned libdragon and tiny3d repositories respectively.
+    # Paths to directories with cloned libdragon, tiny3d, and pyrite64 repositories respectively.
     # By default, assumes they are in the parent directory to this script.
     [string]$LibdragonPath = "../libdragon",
     [string]$Tiny3dPath = "../tiny3d",
+    [string]$Pyrite64Path = "../pyrite64",
     # Output path for header files. Defaults to 'include' directory in the same directory as this script.
     [string]$OutputPath = "./include",
     # If specified, cleans existing header files in the output directory before updating.
@@ -64,6 +65,16 @@ if (-not (Test-Path $OutputPath)) {
     New-Item -ItemType Directory -Path $OutputPath | Out-Null
 }
 
+function Update-Pyrite64Headers {
+    param (
+        [string]$Pyrite64Path,
+        [string]$OutputPath
+    )
+
+    Write-Host "Updating Pyrite64 headers from $Pyrite64Path"
+    Copy-ItemsAndPreserveDirectoryStructure -SourcePath "$Pyrite64Path/n64/engine/include" -DestinationPath $OutputPath -Filter "*.h"
+}
+
 # Optionally clean existing headers
 if ($Clean) {
     Write-Host "Cleaning existing header files..."
@@ -73,4 +84,5 @@ if ($Clean) {
 
 Update-LibdragonHeaders -LibdragonPath $(Resolve-Path $LibdragonPath) $(Resolve-Path $OutputPath)
 Update-Tiny3dHeaders -Tiny3dPath $(Resolve-Path $Tiny3dPath) $(Resolve-Path $OutputPath)
+Update-Pyrite64Headers -Pyrite64Path $(Resolve-Path $Pyrite64Path) $(Resolve-Path $OutputPath)
 Write-Host "Header files updated successfully."
