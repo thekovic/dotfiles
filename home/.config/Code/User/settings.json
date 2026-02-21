@@ -76,16 +76,15 @@
     // ---------------------------
 
     // Sensible standards (wish I could enable C23 but it breaks N64 homebrew).
-    "C_Cpp.default.cStandard": "gnu17",
-    "C_Cpp.default.cppStandard": "gnu++20",
+    "C_Cpp.default.cStandard": "gnu23",
+    "C_Cpp.default.cppStandard": "gnu++23",
     // Stop IntelliSense from confusingly thinking about it and always just consider header files as C++. It's better for compatibility anyway.
     "files.associations": {
         "*.h": "cpp"
     },
     // Always include headers for N64 homebrew so I don't have to do it per-project.
     "C_Cpp.default.includePath": [
-        "C:\\Code\\libdragon\\include",
-        "C:\\Code\\tiny3d\\include"
+        "C:\\Code\\headers64\\include"
     ],
     // (Windows only) Use GCC mode by default to help with IntelliSense analysis for N64 homebrew.
     // "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\g++.exe",
