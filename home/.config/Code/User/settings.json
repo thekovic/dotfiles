@@ -98,4 +98,19 @@
     "redhat.telemetry.enabled": false,
     // Enable this if you suffer from chronic saving to stop the Go extension from slowing to a crawl (especially in big projects like Trivy).
     "go.vetOnSave": "off",
+
+    // CMake status bar visibility.
+    "cmake.options.advanced": {
+        "variant": { 
+            "statusBarVisibility": "visible",
+        }, 
+        "configurePreset": { 
+            "statusBarVisibility": "visible",
+            "statusBarLength": 20
+        },
+        // "buildPreset": { 
+        //     "statusBarVisibility": "visible",
+        //     "statusBarLength": 20 
+        // }, 
+    }
 }
