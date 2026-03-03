@@ -28,12 +28,12 @@ function Start-Ares {
     $exeSuffix = ($IsWindows)? ".exe" : ""
     
     # Find all ares-v*.exe files
-    $aresFiles = Get-ChildItem -Filter "ares-v*$exeSuffix" -ErrorAction SilentlyContinue
+    $aresFiles = Get-ChildItem -Path "Versions" -Filter "ares-v*$exeSuffix" -ErrorAction SilentlyContinue
     if (-not $aresFiles) {
-        Write-Host "No ares-vXXX$exeSuffix files found in $aresDir." -ForegroundColor Yellow
+        Write-Host "No ares-vXXX$exeSuffix files found in $(Join-Path $aresDir "Versions")" -ForegroundColor Yellow
         # Launch Ares and wait for exit
         Write-Host "Launching Ares (unknown version)..." -ForegroundColor Green
-        Start-Process -FilePath ".\ares$exeSuffix" -ArgumentList $Game -Wait
+        Start-Process -FilePath "ares$exeSuffix" -ArgumentList $Game -Wait
         return
     }
 
@@ -60,8 +60,8 @@ function Start-Ares {
     }
 
     # Compose filenames
-    $exeFile = "ares-v$Version$exeSuffix"
-    $dllFile = "librashader-v$Version.dll"
+    $exeFile = Join-Path "Versions" "ares-v$Version$exeSuffix"
+    $dllFile = Join-Path "Versions" "librashader-v$Version.dll"
 
     # Verify both files exist
     if (-not (Test-Path $exeFile)) {
@@ -87,18 +87,18 @@ function Start-Ares {
     }
 
     # Rename selected versioned files
-    Rename-Item $exeFile "ares$exeSuffix"
-    Rename-Item $dllFile "librashader.dll"
+    Move-Item -Path $exeFile -Destination "ares$exeSuffix"
+    Move-Item -Path $dllFile -Destination "librashader.dll"
 
     try {
         # Launch Ares and wait for exit
         Write-Host "Launching Ares v$Version..." -ForegroundColor Green
-        Start-Process -FilePath ".\ares$exeSuffix" -ArgumentList $Game -Wait
+        Start-Process -FilePath "ares$exeSuffix" -ArgumentList $Game -Wait
     }
     finally {
         # Restore file names
-        Rename-Item "ares$exeSuffix" $exeFile
-        Rename-Item "librashader.dll" $dllFile
+        Move-Item -Path "ares$exeSuffix" -Destination $exeFile
+        Move-Item -Path "librashader.dll" -Destination $dllFile
 
         if ($backupExe) {
             Rename-Item $backupExe "ares$exeSuffix"
@@ -130,7 +130,7 @@ if (-not $aresDir) {
     $aresDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 }
 
-# Ensure we are in the script directory
+# Ensure we are in the Ares directory
 Push-Location -Path $aresDir
 
 Start-Ares $gamePath $Version
