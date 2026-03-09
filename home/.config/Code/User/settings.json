@@ -7,6 +7,8 @@
     "files.eol": "\n",
     // This is usually annoying, not useful.
     "editor.autoClosingComments": "never",
+    // Indent content on paste.
+    "editor.autoIndentOnPaste": true,
 
     // ---------------------------
     // SECTION: Editor look & feel
