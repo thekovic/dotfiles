@@ -51,6 +51,8 @@
     // "window.zoomLevel": 1,
     // Enable if Copilot tab bothers you too much.
     // "workbench.secondarySideBar.defaultVisibility": "hidden",
+    // Use OG Dark Theme.
+    "workbench.colorTheme": "Dark Modern",
 
     // ---------------------------
     // SECTION: Default theme fixes
