@@ -57,6 +57,11 @@ function Get-FirstKeyframeTime {
         [bool]$FindEarliest
     )
 
+    # If both ScanStart and ScanEnd are 0, then we don't need to scan for keyframes because it means we aren't trimming the start of the video.
+    if ($ScanStart -eq 0 -and $ScanEnd -eq 0) {
+        return 0
+    }
+
     $scanDuration = $ScanEnd - $ScanStart
     Write-Host "Scanning from $ScanStart to $ScanEnd ($scanDuration)"
 
