@@ -5,7 +5,7 @@
 	required = true
 [user]
 	name = thekovic
-	email = 72971433+thekovic@users.noreply.github.com
+	email = fosskovic@gmail.com
 [pull]
 	rebase = true
 [core]
@@ -17,3 +17,5 @@
 	defaultBranch = main	
 [checkout]
 	defaultRemote = origin
+[submodule]
+	recurse = true
