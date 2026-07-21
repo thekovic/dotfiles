@@ -52,8 +52,11 @@ function Start-Ares {
 
     # Choose version
     if (-not $Version) {
-        $Version = ($versions | Sort-Object -Descending | Select-Object -First 1)
-        Write-Host "No version specified. Using newest version: v$Version" -ForegroundColor Yellow
+        # $Version = ($versions | Sort-Object -Descending | Select-Object -First 1)
+        # Write-Host "No version specified. Using newest version: v$Version" -ForegroundColor Yellow
+        Write-Host "No version specified. Launching non-versioned executable..." -ForegroundColor Yellow
+        Start-Process -FilePath "ares$exeSuffix" -ArgumentList $Game -Wait
+        return 
     } elseif (-not ($versions -contains [int]$Version)) {
         Write-Host "Version v$Version not found." -ForegroundColor Red
         return
