@@ -26,8 +26,10 @@ if ($IsWindows) {
         $convertedArgs = @("-c") + @($convertedArgs)
 
         # Spawn bash instance. Set MSYSTEM=UCRT64 to try to pass off as proper MSYS2 UCRT64 environment.
+        # Add MSYS2 UCRT64 folders to the start of PATH so that Windows\System32 EXEs can't shadow Unix tools.
         Start-Process bash -NoNewWindow -Wait -ArgumentList ($convertedArgs -join ' ') -Environment @{
-            MSYSTEM = 'UCRT64'
+            MSYSTEM = 'UCRT64';
+            PATH = '/ucrt64/bin:/usr/local/bin:/usr/bin:/bin:' + $env:Path
         }
     }
 
