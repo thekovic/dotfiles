@@ -73,7 +73,8 @@ function Update-GitSubmodules {
 }
 
 function Build-Libdragon {
-    $cmd = "make install && make tools-install && make examples"
+    $cores = $env:NUMBER_OF_PROCESSORS / 2
+    $cmd = "make -j$cores install && make -j$cores tools-install && make -j$cores examples"
     if ($IsWindows) {
         msys $cmd
     }
