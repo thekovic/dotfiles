@@ -8,6 +8,7 @@ Set-Alias grep Select-String
 Set-Alias Invoke-Rebase Invoke-GitRebase
 Set-Alias Trim-Video Edit-VideoTrim
 Set-Alias Take-Commit Update-GitCommitAuthorship
+Set-Alias gsmu Update-GitSubmodules
 
 if ($IsWindows) {
     function Invoke-Bash {
@@ -63,6 +64,21 @@ if ($IsLinux) {
         }
 
         $env:PATH = ($currentPath -join ":")
+    }
+}
+
+function Update-GitSubmodules {
+    Write-Host "Updating git submodules..."
+    git submodule update --init --recursive
+}
+
+function Build-Libdragon {
+    $cmd = "make install && make tools-install && make examples"
+    if ($IsWindows) {
+        msys $cmd
+    }
+    else {
+        Invoke-Expression $cmd
     }
 }
 
