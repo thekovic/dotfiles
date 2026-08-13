@@ -35,6 +35,13 @@ if ($IsWindows) {
     }
 
     Set-Alias msys Invoke-Bash
+
+    # Shadow the fake Python utility that opens Microsoft Store with Python Launcher from Winget
+    function Invoke-PythonLauncher {
+        py @args
+    }
+
+    Set-Alias python Invoke-PythonLauncher
 }
 
 if ($IsLinux) {
