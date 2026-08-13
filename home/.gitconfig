@@ -6,15 +6,15 @@
 [user]
 	name = thekovic
 	email = fosskovic@gmail.com
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
 [pull]
 	rebase = true
 [core]
 	autocrlf = input
 	editor = code --wait
-[push]
-	autoSetupRemote = true
-[init]
-	defaultBranch = main	
 [checkout]
 	defaultRemote = origin
 [submodule]
