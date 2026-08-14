@@ -1,3 +1,16 @@
+<#
+.SYNOPSIS
+    Converts a time string to seconds.
+.DESCRIPTION
+    This function takes a time string in the format HH:MM:SS[.ms], MM:SS[.ms], or SS[.ms] and converts it to seconds.
+.PARAMETER Time
+    The time string to convert.
+.EXAMPLE
+    Convert-ToSeconds -Time "01:30:00"
+    This command will convert the time "01:30:00" to 5400 seconds.
+.NOTES
+    Ensure the time string is in a valid format.
+#>
 function Convert-ToSeconds {
     param([string]$Time)
 
@@ -96,6 +109,25 @@ function Get-FirstKeyframeTime {
     }
 }
 
+<#
+.SYNOPSIS
+    Trims a video file between specified start and end times, adjusting to the nearest keyframes.
+.DESCRIPTION
+    This function trims a video file between the specified start and end times. It first converts the provided time strings to seconds, then finds the nearest keyframes before the start and end times. Finally, it uses ffmpeg to trim the video between these keyframes and saves the output to a new file.
+.PARAMETER StartTime
+    The start time for trimming, in the format HH:MM:SS[.ms], MM:SS[.ms], or SS[.ms].
+.PARAMETER EndTime
+    The end time for trimming, in the format HH:MM:SS[.ms], MM:SS[.ms], or SS[.ms].
+.PARAMETER InputFile
+    The path to the input video file to be trimmed.
+.PARAMETER OutputFile
+    The path where the trimmed video will be saved.
+.EXAMPLE
+    Edit-VideoTrim -StartTime "00:01:30" -EndTime "00:02:00" -InputFile "input.mp4" -OutputFile "output.mp4"
+    This command will trim the video "input.mp4" from 1 minute 30 seconds to 2 minutes, adjusting to the nearest keyframes, and save it as "output.mp4".
+.NOTES
+    Ensure that ffmpeg and ffprobe are installed and available in the system's PATH.
+#>
 function Edit-VideoTrim {
     [CmdletBinding()]
     param (

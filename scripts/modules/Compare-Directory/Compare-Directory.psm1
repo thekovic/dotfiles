@@ -36,6 +36,13 @@ function Get-FileHashes {
     return $fileHashes
 }
 
+<#
+.SYNOPSIS
+    Compares two directories and reports differences in file content.
+.DESCRIPTION
+    This module provides a function Compare-Directory that compares two directories recursively.
+    It computes SHA1 hashes of files to determine if they are identical or different.
+#>
 function Compare-Directory {
     [CmdletBinding()]
     param (

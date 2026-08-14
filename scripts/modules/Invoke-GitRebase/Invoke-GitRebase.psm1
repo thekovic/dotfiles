@@ -1,3 +1,10 @@
+<#
+.SYNOPSIS
+    Performs a git rebase of a pull request branch onto a base branch.
+.DESCRIPTION
+    This module provides a function Invoke-GitRebase that automates the process of rebasing
+    a pull request branch onto a specified base branch. It checks out the base branch, fetches the latest changes, checks out the pull request branch, and performs the rebase.
+#>
 function Invoke-GitRebase {
     [CmdletBinding()]
     param(
