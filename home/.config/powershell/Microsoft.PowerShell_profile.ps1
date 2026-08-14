@@ -1,6 +1,23 @@
 # Windows: $HOME\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 # Linux:   ~/.config/powershell/Microsoft.PowerShell_profile.ps1
 
+####################
+# SECTION: Tiny utilities and functions.
+####################
+function Update-GitSubmodules {
+    Write-Host "Updating git submodules..."
+    git submodule update --init --recursive
+}
+
+function Build-Libdragon {
+    $cores = $env:NUMBER_OF_PROCESSORS / 2
+    $cmd = "make -j$cores install && make -j$cores tools-install && make -j$cores examples"
+    Invoke-Bash $cmd
+}
+
+####################
+# SECTION: Aliases.
+####################
 # Windows has no 'grep' so make an alias.
 # Keep it on Linux too for consistent behaviour (might change my mind later).
 Set-Alias grep Select-String
@@ -10,30 +27,10 @@ Set-Alias Trim-Video Edit-VideoTrim
 Set-Alias Take-Commit Update-GitCommitAuthorship
 Set-Alias gsmu Update-GitSubmodules
 
+####################
+# SECTION: Windows only.
+####################
 if ($IsWindows) {
-    function Invoke-Bash {
-        if (-not (Get-Command bash -ErrorAction SilentlyContinue)) {
-            Write-Error "'bash' was not found. Please install MSYS2 and ensure bash.exe is on PATH."
-            return
-        }
-
-        # Convert backwards slashes to forward slashes to handle autosuggest from Powershell.
-        $convertedArgs = $args | ForEach-Object { ($_ -replace '\\', '/') }
-        # Surround arguments with quotes so that they're single string for bash.
-        $convertedArgs = '"' + ($convertedArgs -join ' ') + '"'
-        # Print what we got for debugging purpose.
-        Write-Host "[bash]" $convertedArgs
-        # Prepend "-c" so that bash interprets our arguments as command.
-        $convertedArgs = @("-c") + @($convertedArgs)
-
-        # Spawn bash instance. Set MSYSTEM=UCRT64 to try to pass off as proper MSYS2 UCRT64 environment.
-        # Add MSYS2 UCRT64 folders to the start of PATH so that Windows\System32 EXEs can't shadow Unix tools.
-        Start-Process bash -NoNewWindow -Wait -ArgumentList ($convertedArgs -join ' ') -Environment @{
-            MSYSTEM = 'UCRT64';
-            PATH = '/ucrt64/bin:/usr/local/bin:/usr/bin:/bin:' + $env:Path
-        }
-    }
-
     Set-Alias msys Invoke-Bash
 
     # Shadow the fake Python utility that opens Microsoft Store with Python Launcher from Winget
@@ -44,6 +41,9 @@ if ($IsWindows) {
     Set-Alias python Invoke-PythonLauncher
 }
 
+####################
+# SECTION: Linux only.
+####################
 if ($IsLinux) {
     # Make sure we have proper controls in the shell.
     Set-PSReadLineOption -EditMode Windows
@@ -74,23 +74,10 @@ if ($IsLinux) {
     }
 }
 
-function Update-GitSubmodules {
-    Write-Host "Updating git submodules..."
-    git submodule update --init --recursive
-}
 
-function Build-Libdragon {
-    $cores = $env:NUMBER_OF_PROCESSORS / 2
-    $cmd = "make -j$cores install && make -j$cores tools-install && make -j$cores examples"
-    if ($IsWindows) {
-        msys $cmd
-    }
-    else {
-        Invoke-Expression $cmd
-    }
-}
-
-# Autorun section.
+####################
+# SECTION: Autorun.
+####################
 Invoke-Expression (&starship init powershell)
 # Fastfetch has Windows port but I somehow kinda don't feel the need on Windows.
 if ($IsLinux) {
