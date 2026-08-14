@@ -1,3 +1,5 @@
+#!/usr/bin/env pwsh
+
 param (
     # Paths to directories with cloned libdragon, tiny3d, and pyrite64 repositories respectively.
     # By default, assumes they are in the parent directory to this script.
