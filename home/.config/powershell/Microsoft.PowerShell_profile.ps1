@@ -10,6 +10,18 @@ function Update-GitSubmodules {
 }
 
 function Build-Libdragon {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [switch]
+        $Clean
+    )
+
+    if ($Clean) {
+        $cmd = "make clobber"
+        Invoke-Bash $cmd
+    }
+
     $cores = $env:NUMBER_OF_PROCESSORS / 2
     $cmd = "make -j$cores install && make -j$cores tools-install && make -j$cores examples"
     Invoke-Bash $cmd
