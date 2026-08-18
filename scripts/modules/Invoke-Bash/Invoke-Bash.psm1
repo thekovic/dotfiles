@@ -20,12 +20,12 @@ function Invoke-Bash {
         return
     }
 
-    if ($IsWindows) {
-        # Convert backwards slashes to forward slashes to handle autosuggest on Windows.
-        $convertedArgs = $args | ForEach-Object { ($_ -replace '\\', '/') }
-    }
     # Convert special token '§§and§§' to '&&' to allow for multiple commands in a single Invoke-Bash call.
     $convertedArgs = $args | ForEach-Object { ($_ -replace '§§and§§', '&&') }
+    if ($IsWindows) {
+        # Convert backwards slashes to forward slashes to handle autosuggest on Windows.
+        $convertedArgs = $convertedArgs | ForEach-Object { ($_ -replace '\\', '/') }
+    }
     # Surround arguments with quotes so that they're single string for bash.
     $convertedArgs = '"' + ($convertedArgs -join ' ') + '"'
     # Print what we got for debugging purpose.
