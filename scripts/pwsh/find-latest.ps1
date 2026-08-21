@@ -42,4 +42,4 @@ Get-ChildItem -LiteralPath $Path -Recurse -File |
     Select-Object -First $FileCount |
     Format-Table @{Label="Created";Expression={$_.CreationTime}},
                  @{Label="Size";Expression={Get-ReadableSize -Bytes $_.Length}},
-                 @{Label="File";Expression={Resolve-Path -Relative $_.FullName}}
+                 @{Label="File";Expression={Resolve-Path -LiteralPath $_.FullName -Relative}}
