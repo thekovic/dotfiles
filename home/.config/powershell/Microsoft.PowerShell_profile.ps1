@@ -30,9 +30,7 @@ function Build-Libdragon {
 ####################
 # SECTION: Aliases.
 ####################
-# Windows has no 'grep' so make an alias.
-# Keep it on Linux too for consistent behaviour (might change my mind later).
-Set-Alias grep Select-String
+
 # Alias my own modules for easier access.
 Set-Alias Invoke-Rebase Invoke-GitRebase
 Set-Alias Trim-Video Edit-VideoTrim
@@ -43,6 +41,9 @@ Set-Alias gsmu Update-GitSubmodules
 # SECTION: Windows only.
 ####################
 if ($IsWindows) {
+    # Windows has no 'grep' so make an alias.
+    Set-Alias grep Select-String
+    # Add short alias for my MSYS2 helper.
     Set-Alias msys Invoke-Bash
 
     # Shadow the fake Python utility that opens Microsoft Store with Python Launcher from Winget
