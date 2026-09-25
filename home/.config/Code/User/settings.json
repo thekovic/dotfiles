@@ -59,21 +59,32 @@
     // ---------------------------
     
     "editor.tokenColorCustomizations": {
-        // Restore C keywords to original thick purple from current faint pink.
-        "textMateRules": [
-            {
-                "scope": "keyword.control.c",
-                "settings": {
-                    "foreground": "#C586C0"
+        "[Dark Modern]": {
+            // Restore C keywords to original thick purple from current faint pink.
+            "textMateRules": [
+                {
+                    "scope": "keyword.control.c",
+                    "settings": {
+                        "foreground": "#C586C0"
+                    }
+                },
+                {
+                    "scope": "keyword.control.directive.include.c",
+                    "settings": {
+                        "foreground": "#C586C0"
+                    }
                 }
-            },
-            {
-                "scope": "keyword.control.directive.include.c",
-                "settings": {
-                    "foreground": "#C586C0"
-                }
-            }
-        ]
+            ]
+        },
+    },
+
+    "workbench.colorCustomizations": {
+        "[Dark Modern]": {
+            // At some point, the tab group background became too bright and distracting. This restores it to a darker shade.
+            "editorGroupHeader.tabsBackground": "#181818",
+            // Make the main editor background a bit darker to reduce eye strain.
+            "editor.background": "#1C1C1C"
+        }
     },
 
     // ---------------------------
