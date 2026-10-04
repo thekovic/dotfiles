@@ -44,7 +44,7 @@ function New-LibdragonConfig {
                 defines = @(
                     "N64"
                     if ($Preview) {
-                        "LIBDRAGON_PREVIEW=1"
+                        "LIBDRAGON_PREVIEW=2"
                     }
                 )
             }
