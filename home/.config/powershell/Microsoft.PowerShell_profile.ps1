@@ -91,8 +91,8 @@ if ($IsLinux) {
 ####################
 # SECTION: Autorun.
 ####################
+
+# Git command tab completion (requires Install-Module posh-git -Scope CurrentUser).
+Import-Module posh-git
+# Starship fancy prompt.
 Invoke-Expression (&starship init powershell)
-# Fastfetch has Windows port but I somehow kinda don't feel the need on Windows.
-if ($IsLinux) {
-    Invoke-Expression fastfetch
-}
