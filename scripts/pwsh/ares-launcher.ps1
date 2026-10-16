@@ -122,6 +122,8 @@ if ($Game -and (Test-Path $Game)) {
     if (($null -ne $env:WSL_DISTRO_NAME) -and $IsLinux) {
         $gamePath = wslpath -w $gamePath
     }
+    # Make super sure the path is quoted in case it has spaces
+    $gamePath = '"{0}"' -f $gamePath
 } else {
     $gamePath = ''
 }
